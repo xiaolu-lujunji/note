@@ -45,7 +45,8 @@ export default function CodePicker() {
       // Same logic as MenuList.js
       const nextFocusDisabled = disabledItemsFocusable
         ? false
-        : !option || option.disabled || option.getAttribute('aria-disabled') === 'true'
+        : // @ts-ignore
+          !option || option.disabled || option.getAttribute('aria-disabled') === 'true'
 
       if ((option && !option.hasAttribute('tabindex')) || nextFocusDisabled) {
         // Move to the next element.
@@ -64,7 +65,7 @@ export default function CodePicker() {
     }: {
       event: React.KeyboardEvent<HTMLDivElement>
       index: number
-      reason?: 'auto' | 'keyboard' | 'mouse'
+      reason?: 'auto' | 'keyboard' | 'mouse' | 'keyboard'
     }) => {
       highlightedIndexRef.current = index
 
@@ -119,7 +120,7 @@ export default function CodePicker() {
       // Consider this API instead once it has a better browser support:
       // .scrollIntoView({ scrollMode: 'if-needed', block: 'nearest' });
       if (listboxNode.scrollHeight > listboxNode.clientHeight && reason !== 'mouse') {
-        const element = option
+        const element = option as HTMLLIElement
 
         const scrollBottom = listboxNode.clientHeight + listboxNode.scrollTop
         const elementBottom = element.offsetTop + element.offsetHeight
@@ -144,8 +145,8 @@ export default function CodePicker() {
     }: {
       event: React.KeyboardEvent<HTMLDivElement>
       diff: 'start' | 'end' | number
-      direction?: 'next'
-      reason?: 'auto'
+      direction?: 'next' | 'previous'
+      reason?: 'auto' | 'keyboard'
     }) => {
       const getNextIndex = () => {
         const maxIndex = searchResults.length - 1
@@ -210,17 +211,17 @@ export default function CodePicker() {
             })
             break
           case 'PageUp':
-            event.preventDefault()
-            changeHighlightedIndex({
-              diff: -pageSize,
-              direction: 'previous',
-              reason: 'keyboard',
-              event,
-            })
+            // event.preventDefault()
+            // changeHighlightedIndex({
+            //   diff: -pageSize,
+            //   direction: 'previous',
+            //   reason: 'keyboard',
+            //   event,
+            // })
             break
           case 'PageDown':
-            event.preventDefault()
-            changeHighlightedIndex({ diff: pageSize, direction: 'next', reason: 'keyboard', event })
+            // event.preventDefault()
+            // changeHighlightedIndex({ diff: pageSize, direction: 'next', reason: 'keyboard', event })
             break
           case 'ArrowDown':
             event.preventDefault()

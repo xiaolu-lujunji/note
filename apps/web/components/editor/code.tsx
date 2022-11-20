@@ -1,6 +1,7 @@
 import { styled } from '@mui/material/styles'
 import clsx from 'clsx'
 import type { RenderElementProps } from 'slate-react'
+import type * as customTypes from '@note/slate/custom-types'
 
 const Pre = styled('pre')({
   padding: 14,
@@ -20,7 +21,7 @@ const StyledCode = styled('code')({
 export default function Code(props: RenderElementProps) {
   const { element, attributes, children } = props
 
-  const { lang } = element
+  const { lang } = element as customTypes.Code
 
   return (
     <Pre {...attributes}>

@@ -10,9 +10,16 @@ import { useCallback } from 'react'
 import Prism from 'prismjs'
 import eventEmitter from './event-emitter'
 import { isCodeSyntax } from './detect-type'
-import type { BaseEditor, Descendant, Editor as SlateEditor, NodeEntry, Range } from 'slate'
+import type {
+  BaseEditor,
+  BaseRange,
+  Descendant,
+  Editor as SlateEditor,
+  NodeEntry,
+  Range,
+} from 'slate'
 import type { ReactEditor, RenderElementProps, RenderLeafProps } from 'slate-react'
-import type * as customTypes from './custom-types'
+import type * as customTypes from '@note/slate/custom-types'
 
 // Prevent any elements from being automatically highlighted
 if (typeof window !== 'undefined') {
@@ -24,6 +31,9 @@ declare module 'slate' {
     Editor: BaseEditor & ReactEditor
     Element: customTypes.CustomElement
     Text: customTypes.CustomText
+    Range: BaseRange & {
+      tokenType?: string
+    }
   }
 }
 
