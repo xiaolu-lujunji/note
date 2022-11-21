@@ -6,6 +6,7 @@ import Paragraph from './paragraph'
 import Code from './code'
 import CodeLine from './code-line'
 import CodeSyntax from './code-syntax'
+import Heading from './heading'
 import { useCallback } from 'react'
 import Prism from 'prismjs'
 import eventEmitter from './event-emitter'
@@ -57,6 +58,8 @@ export default function Editor(props: EditorProps) {
     switch (element.type) {
       case 'paragraph':
         return <Paragraph {...props} />
+      case 'heading':
+        return <Heading {...props} />
       case 'code':
         return <Code {...props} />
       case 'codeLine':

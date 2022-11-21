@@ -3,6 +3,12 @@ export interface Paragraph {
   children: Text[]
 }
 
+export interface Heading {
+  type: 'heading'
+  depth: 1 | 2 | 3 | 4 | 5 | 6
+  children: Text[]
+}
+
 export interface Code {
   type: 'code'
   lang: string
@@ -22,6 +28,6 @@ export interface Text {
   text: string
 }
 
-export type CustomElement = Paragraph | Code | CodeLine
+export type CustomElement = Paragraph | Code | CodeLine | Heading
 
 export type CustomText = Text | CodeSyntax

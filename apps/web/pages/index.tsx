@@ -6,11 +6,16 @@ import { withHistory } from 'slate-history'
 import { withReact } from 'slate-react'
 import { withCode } from '@note/slate/plugins/code'
 import { withCodePicker } from '@note/slate/plugins/code-picker'
+import { withHeading } from '@note/slate/plugins/heading'
 import deserialize from '@note/serializing/deserialize'
 import type { Descendant } from 'slate'
 
 const INITIAL_VALUE = deserialize(`
-This is a paragraph.
+This is a paragraph
+
+# heading one
+## heading two
+### heading three
 
 \`\`\`javascript
 function main() {
@@ -20,7 +25,10 @@ function main() {
 `) as Descendant[]
 
 export default function Web() {
-  const editor = useMemo(() => withCode(withCodePicker(withReact(withHistory(createEditor())))), [])
+  const editor = useMemo(
+    () => withHeading(withCode(withCodePicker(withReact(withHistory(createEditor()))))),
+    []
+  )
 
   return (
     <div>
