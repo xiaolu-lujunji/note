@@ -17,6 +17,11 @@ export interface ThematicBreak extends Void {
   type: 'thematicBreak'
 }
 
+export interface Blockquote {
+  type: 'blockquote'
+  children: FlowContent[]
+}
+
 export interface Code {
   type: 'code'
   lang: string
@@ -36,6 +41,10 @@ export interface Text {
   text: string
 }
 
-export type CustomElement = Paragraph | Code | CodeLine | Heading | ThematicBreak
+type Content = Paragraph
+
+type FlowContent = Blockquote | Heading | Content
+
+export type CustomElement = Paragraph | Code | CodeLine | Heading | ThematicBreak | Blockquote
 
 export type CustomText = Text | CodeSyntax

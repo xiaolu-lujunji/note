@@ -8,6 +8,7 @@ import { withCode } from '@note/slate/plugins/code'
 import { withCodePicker } from '@note/slate/plugins/code-picker'
 import { withHeading } from '@note/slate/plugins/heading'
 import { withThematicBreak } from '@note/slate/plugins/thematic-break'
+import { withBlockquote } from '@note/slate/plugins/blockquote'
 import deserialize from '@note/serializing/deserialize'
 import type { Descendant } from 'slate'
 
@@ -22,6 +23,8 @@ This is a paragraph
 
 This is a paragraph
 
+> blockquote
+
 \`\`\`javascript
 function main() {
   console.log("Hello, JavaScript!");
@@ -32,15 +35,17 @@ function main() {
 export default function Web() {
   const editor = useMemo(
     () =>
-      withThematicBreak(
-        withHeading(withCode(withCodePicker(withReact(withHistory(createEditor())))))
+      withBlockquote(
+        withThematicBreak(
+          withHeading(withCode(withCodePicker(withReact(withHistory(createEditor())))))
+        )
       ),
     []
   )
 
   return (
     <div>
-      <Container>
+      <Container className="markdown-body">
         <Editor editor={editor} initialValue={INITIAL_VALUE} />
       </Container>
     </div>
