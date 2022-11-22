@@ -9,6 +9,14 @@ export interface Heading {
   children: Text[]
 }
 
+interface Void {
+  children: [{ text: '' }]
+}
+
+export interface ThematicBreak extends Void {
+  type: 'thematicBreak'
+}
+
 export interface Code {
   type: 'code'
   lang: string
@@ -28,6 +36,6 @@ export interface Text {
   text: string
 }
 
-export type CustomElement = Paragraph | Code | CodeLine | Heading
+export type CustomElement = Paragraph | Code | CodeLine | Heading | ThematicBreak
 
 export type CustomText = Text | CodeSyntax
