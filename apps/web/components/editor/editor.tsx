@@ -9,6 +9,8 @@ import CodeSyntax from './code-syntax'
 import Heading from './heading'
 import ThematicBreak from './thematic-break'
 import Blockquote from './blockquote'
+import List from './list'
+import ListItem from './list-item'
 import { useCallback } from 'react'
 import Prism from 'prismjs'
 import eventEmitter from './event-emitter'
@@ -66,6 +68,10 @@ export default function Editor(props: EditorProps) {
         return <ThematicBreak {...props} />
       case 'blockquote':
         return <Blockquote {...props} />
+      case 'list':
+        return <List {...props} />
+      case 'listItem':
+        return <ListItem {...props} />
       case 'code':
         return <Code {...props} />
       case 'codeLine':

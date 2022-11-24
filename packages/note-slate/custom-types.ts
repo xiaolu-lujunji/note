@@ -22,6 +22,18 @@ export interface Blockquote {
   children: FlowContent[]
 }
 
+export interface List {
+  type: 'list'
+  ordered: boolean
+  start: number | null
+  children: ListItem[]
+}
+
+export interface ListItem {
+  type: 'listItem'
+  children: FlowContent[]
+}
+
 export interface Code {
   type: 'code'
   lang: string
@@ -45,6 +57,14 @@ type Content = Paragraph
 
 type FlowContent = Blockquote | Heading | Content
 
-export type CustomElement = Paragraph | Code | CodeLine | Heading | ThematicBreak | Blockquote
+export type CustomElement =
+  | Paragraph
+  | Code
+  | CodeLine
+  | Heading
+  | ThematicBreak
+  | Blockquote
+  | List
+  | ListItem
 
 export type CustomText = Text | CodeSyntax

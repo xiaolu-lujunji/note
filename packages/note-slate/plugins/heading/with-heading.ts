@@ -6,17 +6,28 @@ export default function withHeading(editor: Editor) {
   const { insertBreak, insertText, deleteBackward } = editor
 
   editor.insertBreak = () => {
+    let atEnd = false
+
     if (editor.selection && Range.isCollapsed(editor.selection)) {
       const heading = Editor.above(editor, {
         match: (node) => Element.isElement(node) && node.type === 'heading',
       })
-      if (heading && Point.equals(editor.selection.anchor, Editor.end(editor, heading[1]))) {
-        Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] })
-        return
-      }
+      atEnd = Boolean(
+        heading && Point.equals(editor.selection.anchor, Editor.end(editor, heading[1]))
+      )
     }
 
     insertBreak()
+
+    if (atEnd) {
+      Transforms.setNodes(
+        editor,
+        { type: 'paragraph' },
+        {
+          match: (node) => Element.isElement(node) && node.type === 'heading',
+        }
+      )
+    }
   }
 
   editor.insertText = (text) => {

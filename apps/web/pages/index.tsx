@@ -9,6 +9,7 @@ import { withCodePicker } from '@note/slate/plugins/code-picker'
 import { withHeading } from '@note/slate/plugins/heading'
 import { withThematicBreak } from '@note/slate/plugins/thematic-break'
 import { withBlockquote } from '@note/slate/plugins/blockquote'
+import { withList } from '@note/slate/plugins/list'
 import deserialize from '@note/serializing/deserialize'
 import type { Descendant } from 'slate'
 
@@ -25,6 +26,14 @@ This is a paragraph
 
 > blockquote
 
+- Common Mark
+- Github Flavored Markdown
+- Frontmatter
+
+1. First
+2. Second
+3. Third
+
 \`\`\`javascript
 function main() {
   console.log("Hello, JavaScript!");
@@ -35,9 +44,11 @@ function main() {
 export default function Web() {
   const editor = useMemo(
     () =>
-      withBlockquote(
-        withThematicBreak(
-          withHeading(withCode(withCodePicker(withReact(withHistory(createEditor())))))
+      withList(
+        withBlockquote(
+          withThematicBreak(
+            withHeading(withCode(withCodePicker(withReact(withHistory(createEditor())))))
+          )
         )
       ),
     []
